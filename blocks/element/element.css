@@ -1,0 +1,10 @@
+.element {
+    max-width: 282px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+    list-style: none;
+    border-radius: 10px;
+}
