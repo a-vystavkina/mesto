@@ -1,24 +1,4 @@
 .content {
   min-width: 320px;
-  max-width: calc(100% - 2*200px);
   margin: 0 auto;
-}
-
-@media screen and (max-width: 1279px) {
-  .content {
-    max-width: calc(100% - 2*100px);
-  }
-}
-
-@media screen and (max-width: 1023px) {
-  .content {
-    max-width: calc(100% - 2*50px);
-  }
-}
-
-
-@media screen and (max-width: 767px) {
-  .content {
-    max-width: 100%;
-  }
 }

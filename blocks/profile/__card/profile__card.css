@@ -1,13 +1,12 @@
 .profile__card {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 @media screen and (max-width: 767px) {
-    .profile__card {
-        display: block;
-        text-align: center;
-    }
+  .profile__card {
+    display: block;
+    text-align: center;
+  }
 }
-
