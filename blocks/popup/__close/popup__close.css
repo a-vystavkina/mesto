@@ -1,7 +1,7 @@
 .popup__close {
   position: absolute;
-  top: -11%;
-  right: -10%;
+  top: -40px;
+  right: -40px;
   border: 0;
   background-image: url(../../../images/close.svg);
   background-repeat: no-repeat;
@@ -21,7 +21,7 @@
 
 @media screen and (max-width: 767px) {
   .popup__close {
-    top: -10%;
+    top: -36px;
     right: 0;
     max-width: 20px;
     min-height: 20px;

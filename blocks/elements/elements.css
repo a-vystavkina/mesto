@@ -1,7 +1,7 @@
 .elements {
   padding-top: 49px;
   display: grid;
-  grid-template-columns: repeat(3, 282px);
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
   grid-template-rows: auto;
   grid-auto-rows: auto;
   column-gap: 17px;
@@ -13,7 +13,6 @@
 
 @media screen and (max-width: 1023px) {
   .elements {
-    grid-template-columns: repeat(2, 1fr);
     max-width: 600px;
   }
 }
@@ -21,9 +20,6 @@
 @media screen and (max-width: 767px) {
   .elements {
     padding-top: 36px;
-    grid-template-columns: repeat(1, 1fr);
-    column-gap: 0;
-    row-gap: 20px;
     justify-items: center;
     max-width: calc(100% - 2*19px);
   }

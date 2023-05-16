@@ -11,6 +11,7 @@
   cursor: pointer;
   margin-top: 18px;
   transition: opacity 1s ease;
+  border: 0;
 }
 
 .form__button:hover {
@@ -22,5 +23,6 @@
     font-size: 14px;
     line-height: 17px;
     margin-top: 15px;
+    min-height: 46px;
   }
 }

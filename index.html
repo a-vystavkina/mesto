@@ -22,53 +22,53 @@
           <img src="./images/kusto.jpg" class="profile__avatar" alt="Жак-Ив Кусто">
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button type="button" class="profile__edit-button"></button>
+            <button type="button" class="profile__edit-button" aria-label="Редактирование имени и информации о себе"></button>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
         </div>
-        <button type="button" class="profile__add-button"></button>
+        <button type="button" class="profile__add-button" aria-label="Добавить карточку с фотографией"></button>
       </section>
       <section class="elements">
         <div class="element">
           <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
           <div class="element__info">
             <h2 class="element__title">Карачаевск</h2>
-            <button type="button" class="element__like"></button>
+            <button type="button" class="element__like" aria-label="Оценить карточку с фотографией Карачаевска"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
           <div class="element__info">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button type="button" class="element__like"></button>
+            <button type="button" class="element__like" aria-label="Оценить карточку с фотографией Эльбруса"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
           <div class="element__info">
             <h2 class="element__title">Домбай</h2>
-            <button type="button" class="element__like"></button>
+            <button type="button" class="element__like" aria-label="Оценить карточку с фотографией Домбая"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
           <div class="element__info">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button type="button" class="element__like"></button>
+            <button type="button" class="element__like" aria-label="Оценить карточку с фотографией Эльбруса"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
           <div class="element__info">
             <h2 class="element__title">Домбай</h2>
-            <button type="button" class="element__like"></button>
+            <button type="button" class="element__like" aria-label="Оценить карточку с фотографией Домбая"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
           <div class="element__info">
             <h2 class="element__title">Карачаево-Черкесия</h2>
-            <button type="button" class="element__like"></button>
+            <button type="button" class="element__like" aria-label="Оценить карточку с фотографией Карачаевска"></button>
           </div>
         </div>
       </section>
@@ -78,14 +78,12 @@
     </footer>
     <div class="popup">
       <div class="popup__container">
-        <button type="button" class="popup__close"></button>
+        <button type="button" class="popup__close" aria-label="Закрыть диалоговое окно"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form name="add-form" class="popup__form form">
-          <input type="text" name="name" placeholder="Жак-Ив Кусто"
-            class="form__input form__name form__input_data_name">
-          <input type="text" name="job" placeholder="Исследователь океана"
-            class="form__input form__job form__input_data_job">
-          <button type="submit" class="form__button">Сохранить</button>
+          <input type="text" name="name" placeholder="Жак-Ив Кусто" class="form__input" required>
+          <input type="text" name="job" placeholder="Исследователь океана" class="form__input" required>
+          <button type="submit" class="form__button" aria-label="Схранить изменения">Сохранить</button>
         </form>
       </div>
     </div>
