@@ -1,31 +1,3 @@
-//Шесть карточек «из коробки»
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const profileEditButton = document.querySelector('.profile__edit-button'); //Кнопка редактирования
 const popupEdit = document.querySelector('.popup_type_edit-card'); //Окно редактирования
 const popupEditClose = popupEdit.querySelector('.popup__close'); //Кнопка закрытия окна редактирования
@@ -52,28 +24,31 @@ const viewPopup = document.querySelector('.popup_type_img-card'); // Окно с
 const viewPopupClose = viewPopup.querySelector('.popup__close'); //Кнопка закрытия окна с картинкой
 
 //открыть или закрыть popup
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+};
 
-const togglePopup = (popup) => {
-  popup.classList.toggle('popup_opened');
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
 };
 
 // Добавить данные в форму редактирования
-function addValue() {
+function setProfileFormValues() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
 }
 
-function handleFormSubmit (evt) {
+function handleProfileFormSubmit (evt) {
   evt.preventDefault();
 
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobInput.value;
 
-  togglePopup(popupEdit);
+  closePopup(popupEdit);
 }
 
 // Добавление карточки
-const addCard = (nameValue, imgValue) => {
+const card = function(nameValue, imgValue) {
   const element = elementsTemplate.querySelector('.element').cloneNode(true);
   const elementImg = element.querySelector('.element__image');
   const elementTitle = element.querySelector('.element__title');
@@ -98,47 +73,50 @@ const addCard = (nameValue, imgValue) => {
 
   //окно просмотра изображений
   const openViewPopup = () => {
-    togglePopup(viewPopup);
+    openPopup(viewPopup);
 
     viewPopupImage.src = elementImg.src;
     viewPopupTitle.textContent = elementTitle.textContent;
     viewPopupImage.alt = elementTitle.textContent;
 
-    viewPopupClose.onclick = () => togglePopup(viewPopup);
   };
 
   // Обработчики окна просмотра изображения
   elementImg.addEventListener('click', openViewPopup);
 
-  elementsContainer.prepend(element);
+  return element;
+};
+
+const addCard = (name, link) => {
+  elementsContainer.prepend(card(name, link));
 };
 
 const uploadElements = (array) => {
-  array.map((el) => {
-  return addCard(el.name, el.link);
+  array.forEach((el) => {
+    return addCard(el.name, el.link);
   });
 };
 
 
 // Обработчики попапа редактирования
 profileEditButton.addEventListener('click', () => {
-  togglePopup(popupEdit);
-  addValue();
+  openPopup(popupEdit);
+  setProfileFormValues();
 });
 
 popupEditClose.addEventListener('click', () => {
-  togglePopup(popupEdit);
+  closePopup(popupEdit);
 });
 
-formEditElement.addEventListener('submit', handleFormSubmit);
+formEditElement.addEventListener('submit', handleProfileFormSubmit);
 
 // Обработчики попапа добавления карточки
 profileAddButton.addEventListener('click', () => {
-  togglePopup(popupAdd);
+  openPopup(popupAdd);
 });
 
 popupAddClose.addEventListener('click', () => {
-  togglePopup(popupAdd);
+ closePopup(popupAdd);
 });
 
 addElement.addEventListener('click', (evt) => {
@@ -152,7 +130,10 @@ addElement.addEventListener('click', (evt) => {
   name.value = "";
   img.value = "";
 
-  togglePopup(popupAdd);
+  closePopup(popupAdd);
 });
+
+//закрытие окна просмотра изображения
+viewPopupClose.onclick = () => closePopup(viewPopup);
 
 uploadElements(initialCards);
