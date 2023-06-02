@@ -48,7 +48,7 @@ function handleProfileFormSubmit (evt) {
 }
 
 // Добавление карточки
-const card = function(nameValue, imgValue) {
+function createCard(nameValue, imgValue) {
   const element = elementsTemplate.querySelector('.element').cloneNode(true);
   const elementImg = element.querySelector('.element__image');
   const elementTitle = element.querySelector('.element__title');
@@ -87,13 +87,14 @@ const card = function(nameValue, imgValue) {
   return element;
 };
 
-const addCard = (name, link) => {
-  elementsContainer.prepend(card(name, link));
-};
+function addCard(card, container) {
+  container.prepend(card);
+}
 
 const uploadElements = (array) => {
   array.forEach((el) => {
-    return addCard(el.name, el.link);
+    const card = createCard(el.name, el.link);
+    addCard(card, elementsContainer);
   });
 };
 
@@ -125,7 +126,8 @@ addElement.addEventListener('click', (evt) => {
   const name = titleInput;
   const img = linkInput;
 
-  addCard(name.value, img.value);
+  const card = createCard(name.value, img.value);
+  addCard(card, elementsContainer);
 
   name.value = "";
   img.value = "";
