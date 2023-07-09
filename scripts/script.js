@@ -32,6 +32,15 @@ const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
 };
 
+// обработчик клика по кнопке Escape
+const handleEscUp = (event) => {
+  event.preventDefault();
+  const activePopup = document.querySelector('.popup_opened');
+  if (event.key === 'Escape') {
+    closePopup(activePopup);
+  };
+};
+
 // Добавить данные в форму редактирования
 function setProfileFormValues() {
   nameInput.value = profileTitle.textContent;
@@ -120,7 +129,7 @@ popupAddClose.addEventListener('click', () => {
  closePopup(popupAdd);
 });
 
-addElement.addEventListener('click', (evt) => {
+formAddElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const name = titleInput;
@@ -129,13 +138,35 @@ addElement.addEventListener('click', (evt) => {
   const card = createCard(name.value, img.value);
   addCard(card, elementsContainer);
 
-  name.value = "";
-  img.value = "";
+  formAddElement.reset();
 
   closePopup(popupAdd);
+
+  const btnElement = formAddElement.querySelector('.form__button');
+  btnElement.setAttribute('disabled', 'disabled');
+
 });
 
 //закрытие окна просмотра изображения
 viewPopupClose.onclick = () => closePopup(viewPopup);
+
+// закрытие попапа кликом на оверлей
+popupEdit.addEventListener('click', (event) => {
+  if (event.target.classList.contains('popup')) {
+    closePopup(popupEdit);
+  }
+});
+
+popupAdd.addEventListener('click', (event) => {
+  if (event.target.classList.contains('popup')) {
+    closePopup(popupAdd);
+  }
+});
+
+viewPopup.addEventListener('click', (event) => {
+  if (event.target.classList.contains('popup')) {
+    closePopup(viewPopup);
+  }
+})
 
 uploadElements(initialCards);
