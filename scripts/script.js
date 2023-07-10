@@ -26,17 +26,20 @@ const viewPopupClose = viewPopup.querySelector('.popup__close'); //Кнопка 
 //открыть или закрыть popup
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
+  document.addEventListener('keyup', handleEscUp);
 };
 
 const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
   popup.classList.remove('popup_opened');
 };
 
 // обработчик клика по кнопке Escape
 const handleEscUp = (event) => {
   event.preventDefault();
-  const activePopup = document.querySelector('.popup_opened');
+
   if (event.key === 'Escape') {
+    const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
   };
 };
@@ -142,8 +145,8 @@ formAddElement.addEventListener('submit', (evt) => {
 
   closePopup(popupAdd);
 
-  const btnElement = formAddElement.querySelector('.form__button');
-  btnElement.setAttribute('disabled', 'disabled');
+  // const btnElement = formAddElement.querySelector('.form__button');
+  // btnElement.setAttribute('disabled', 'disabled');
 
 });
 

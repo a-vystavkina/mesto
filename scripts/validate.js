@@ -1,26 +1,25 @@
-const enableValidationArray = {
+const selectorsObj = {
   popupForm : '.popup__form',
   inputErrorClass : 'form__input_type_error',
   inputErrorActive : 'form__input-error_active',
   formInput : '.form__input',
-  formSubmit : '.form__button',
-  formSet : '.form__set'
+  formSubmit : '.form__button'
 };
 
 
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add(enableValidationArray.inputErrorClass);
+  inputElement.classList.add(selectorsObj.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(enableValidationArray.inputErrorActive);
+  errorElement.classList.add(selectorsObj.inputErrorActive);
 };
 
 // Функция, которая удаляет класс с ошибкой
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove(enableValidationArray.inputErrorClass);
-  errorElement.classList.remove(enableValidationArray.inputErrorActive);
+  inputElement.classList.remove(selectorsObj.inputErrorClass);
+  errorElement.classList.remove(selectorsObj.inputErrorActive);
   errorElement.textContent = '';
 };
 
@@ -50,8 +49,8 @@ const toggleButtonState = (inputList, buttonElement) => {
 };
 
 const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(enableValidationArray.formInput));
-  const buttonElement = formElement.querySelector(enableValidationArray.formSubmit);
+  const inputList = Array.from(formElement.querySelectorAll(selectorsObj.formInput));
+  const buttonElement = formElement.querySelector(selectorsObj.formSubmit);
 
   toggleButtonState(inputList, buttonElement);
 
@@ -64,19 +63,11 @@ const setEventListeners = (formElement) => {
 };
 
 // функция, которая находит все формы на странице и обрабатывает их
-const enableValidation = (enableValidationArray) => {
-  const formList = Array.from(document.querySelectorAll(enableValidationArray.popupForm));
+const enableValidation = (enableValidationObj) => {
+  const formList = Array.from(document.querySelectorAll(enableValidationObj.popupForm));
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-
-    const fieldsetList = Array.from(formElement.querySelectorAll(enableValidationArray.formSet));
-
-    fieldsetList.forEach((fieldSet) => {
-      setEventListeners(fieldSet);
-    });
+    setEventListeners(formElement);
   });
 };
 
-enableValidation(enableValidationArray);
+enableValidation(selectorsObj);

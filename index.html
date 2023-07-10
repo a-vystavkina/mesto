@@ -40,13 +40,11 @@
         <button type="button" class="popup__close" aria-label="Закрыть диалоговое окно"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form name="edit-form" class="popup__form form" novalidate>
-          <fieldset class="form__set">
-            <input type="text" name="name" id="name" placeholder="Жак-Ив Кусто" class="form__input" minlength="2" maxlength="40" required>
-            <span id="name-error" class="form__input-error"></span>
-            <input type="text" name="job" placeholder="Исследователь океана" class="form__input" minlength="2" maxlength="200" required>
-            <span id="job-error" class="form__input-error"></span>
-            <button class="form__button" aria-label="Сохранить изменения">Сохранить</button>
-          </fieldset>
+          <input type="text" name="name" id="name" placeholder="Имя" class="form__input" minlength="2" maxlength="40" required>
+          <span id="name-error" class="form__input-error"></span>
+          <input type="text" name="job" id="job" placeholder="О себе" class="form__input" minlength="2" maxlength="200" required>
+          <span id="job-error" class="form__input-error"></span>
+          <button class="form__button" aria-label="Сохранить изменения">Сохранить</button>
         </form>
       </div>
     </div>
@@ -55,14 +53,12 @@
         <button type="button" class="popup__close" aria-label="Закрыть окно"></button>
         <h2 class="popup__title">Новое место</h2>
         <form name="add-form" class="popup__form form" novalidate>
-          <fieldset class="form__set">
-            <input type="text" name="title" id="title" placeholder="Название" class="form__input form__input_text_grey" minlength="2" maxlength="30" required>
-            <span id="title-error" class="form__input-error"></span>
-            <input type="url" name="link" id="link" placeholder="Ссылка на картинку" class="form__input form__input_text_grey"
-              required>
-            <span id="link-error" class="form__input-error"></span>
-            <button class="form__button" aria-label="Создать карточку">Создать</button>
-          </fieldset>
+          <input type="text" name="title" id="title" placeholder="Название" class="form__input form__input_text_grey" minlength="2" maxlength="30" required>
+          <span id="title-error" class="form__input-error"></span>
+          <input type="url" name="link" id="link" placeholder="Ссылка на картинку" class="form__input form__input_text_grey"
+            required>
+          <span id="link-error" class="form__input-error"></span>
+          <button class="form__button" aria-label="Создать карточку">Создать</button>
         </form>
       </div>
     </div>
