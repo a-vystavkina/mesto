@@ -30,7 +30,7 @@ const openPopup = (popup) => {
 };
 
 const closePopup = (popup) => {
-  popup.classList.remove('popup_opened');
+  document.removeEventListener('keyup', handleEscUp);
   popup.classList.remove('popup_opened');
 };
 
