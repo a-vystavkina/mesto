@@ -18,10 +18,53 @@ const elementsContainer = document.querySelector('.elements'); // карточк
 const elementsTemplate = document.querySelector('.element-template').content; // шаблон для добавления карточки
 const titleInput = popupAdd.querySelector('input[name="title"]');
 const linkInput = popupAdd.querySelector('input[name="link"]');
-let elementLike; // лайк карточки
-let elementDelete; // удаление карточки
+let elementLike = document.querySelector('.element__like'); // лайк карточки
+let elementDelete = document.querySelector('.element__delete'); // удаление карточки
 const viewPopup = document.querySelector('.popup_type_img-card'); // Окно с картинкой
 const viewPopupClose = viewPopup.querySelector('.popup__close'); //Кнопка закрытия окна с картинкой
+const viewPopupImage = viewPopup.querySelector('.popup__image');
+const viewPopupTitle = viewPopup.querySelector('.popup__figcaption');
+
+
+//Шесть карточек «из коробки»
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const selectorsObj = {
+  popupForm : '.popup__form',
+  inputErrorClass : 'form__input_type_error',
+  inputErrorActive : 'form__input-error_active',
+  formInput : '.form__input',
+  formSubmit : '.form__button'
+};
+
+export {viewPopupImage, viewPopupTitle, viewPopup, viewPopupClose};
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
 
 //открыть или закрыть popup
 const openPopup = (popup) => {
@@ -44,6 +87,14 @@ const handleEscUp = (event) => {
   };
 };
 
+// закрытие попапа кликом на оверлей
+function closeByOverlayClick (event) {
+  const activePopup = document.querySelector('.popup_opened');
+  if (event.target.classList.contains('popup')) {
+    closePopup(activePopup);
+  }
+}
+
 // Добавить данные в форму редактирования
 function setProfileFormValues() {
   nameInput.value = profileTitle.textContent;
@@ -59,57 +110,16 @@ function handleProfileFormSubmit (evt) {
   closePopup(popupEdit);
 }
 
-// Добавление карточки
-function createCard(nameValue, imgValue) {
-  const element = elementsTemplate.querySelector('.element').cloneNode(true);
-  const elementImg = element.querySelector('.element__image');
-  const elementTitle = element.querySelector('.element__title');
-  elementLike = element.querySelector('.element__like');
-  elementDelete = element.querySelector('.element__delete');
-  const viewPopupImage = viewPopup.querySelector('.popup__image');
-  const viewPopupTitle = viewPopup.querySelector('.popup__figcaption');
-
-  elementTitle.textContent = nameValue;
-  elementImg.src = imgValue;
-  elementImg.alt = nameValue;
-
-  //Лайк карточки
-  elementLike.addEventListener('click', (evt) => {
-    evt.target.classList.toggle('element__like_active');
-  });
-
-  //Удаление карточки
-  elementDelete.addEventListener('click', (event) => {
-    event.target.closest('.element').remove();
-  });
-
-  //окно просмотра изображений
-  const openViewPopup = () => {
-    openPopup(viewPopup);
-
-    viewPopupImage.src = elementImg.src;
-    viewPopupTitle.textContent = elementTitle.textContent;
-    viewPopupImage.alt = elementTitle.textContent;
-
-  };
-
-  // Обработчики окна просмотра изображения
-  elementImg.addEventListener('click', openViewPopup);
-
-  return element;
+const addCard = (name, link) => {
+  const card = new Card(name, link, '.element-template', openPopup, closePopup).generateCard();
+  elementsContainer.prepend(card);
 };
-
-function addCard(card, container) {
-  container.prepend(card);
-}
 
 const uploadElements = (array) => {
-  array.forEach((el) => {
-    const card = createCard(el.name, el.link);
-    addCard(card, elementsContainer);
-  });
+  array.forEach((item) => {
+    addCard(item.name, item.link);
+  })
 };
-
 
 // Обработчики попапа редактирования
 profileEditButton.addEventListener('click', () => {
@@ -134,42 +144,26 @@ popupAddClose.addEventListener('click', () => {
 
 formAddElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
-
-  const name = titleInput;
-  const img = linkInput;
-
-  const card = createCard(name.value, img.value);
-  addCard(card, elementsContainer);
-
-  formAddElement.reset();
+  addCard(titleInput.value, linkInput.value);
+  titleInput.value = '';
+  linkInput.value = '';
 
   closePopup(popupAdd);
-
-  // const btnElement = formAddElement.querySelector('.form__button');
-  // btnElement.setAttribute('disabled', 'disabled');
+  formAddCardValidator.toggleButtonState();
 
 });
 
-//закрытие окна просмотра изображения
-viewPopupClose.onclick = () => closePopup(viewPopup);
-
-// закрытие попапа кликом на оверлей
-popupEdit.addEventListener('click', (event) => {
-  if (event.target.classList.contains('popup')) {
-    closePopup(popupEdit);
-  }
-});
-
-popupAdd.addEventListener('click', (event) => {
-  if (event.target.classList.contains('popup')) {
-    closePopup(popupAdd);
-  }
-});
-
-viewPopup.addEventListener('click', (event) => {
-  if (event.target.classList.contains('popup')) {
-    closePopup(viewPopup);
-  }
-})
+popupEdit.addEventListener('mousedown', closeByOverlayClick);
+popupAdd.addEventListener('mousedown', closeByOverlayClick);
+viewPopup.addEventListener('mousedown', closeByOverlayClick);
 
 uploadElements(initialCards);
+
+// валидация формы редактирования
+const formEditValidator = new FormValidator(selectorsObj, formEditElement);
+formEditValidator.enableValidation();
+
+// валидация формы добавления новой карточки
+const formAddCardValidator = new FormValidator(selectorsObj, popupAdd);
+formAddCardValidator.enableValidation();
+
