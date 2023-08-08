@@ -1,4 +1,4 @@
-import {viewPopupImage, viewPopupTitle, viewPopup, viewPopupClose} from './index.js';
+import {viewPopupImage, viewPopupTitle, viewPopup, viewPopupClose} from './utils.js';
 
 export class Card {
   constructor(name, link, cardSelector, openPopup, closePopup) {
@@ -41,34 +41,31 @@ export class Card {
     viewPopupImage.src = '';
     viewPopupImage.alt = '';
     viewPopupTitle.textContent = '';
-    this._closePopup(viewPopup)
+    this._closePopup(viewPopup);
   }
 
   _setEventListeners() {
     // открытие попапа просмотра изображения
     this._element.querySelector('.element__image').addEventListener('click', () => {
       this._handleOpenPopup();
-    })
-    // закрытие попапа просмотра изображения
-    viewPopupClose.addEventListener('click', () => {
-      this._handleClosePopup();
-    })
+    });
     // кнопка удаления карточки
     this._element.querySelector('.element__delete').addEventListener('click', () => {
       this._handleDeleteCard();
-    })
+    });
     // кнопка лайк
     this._element.querySelector('.element__like').addEventListener('click', () => {
       this._handleLikeCard();
-    })
+    });
   }
 
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
+    const elementImage = this._element.querySelector('.element__image');
 
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__image').alt = this._name;
+    elementImage.src = this._link;
+    elementImage.alt = this._name;
     this._element.querySelector('.element__title').textContent = this._name;
 
     return this._element;

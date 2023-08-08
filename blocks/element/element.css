@@ -8,4 +8,6 @@
   list-style: none;
   border-radius: 10px;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
