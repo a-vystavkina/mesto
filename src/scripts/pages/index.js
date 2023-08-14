@@ -1,4 +1,4 @@
-import "./pages/index.css";
+import "./index.css";
 import {profileEditButton, popupEdit, popupEditClose, formEditElement, nameInput,
   jobInput, profileTitle, profileSubtitle, profileAddButton, popupAdd, popupAddClose, formAddElement,
   addElement, elementTitle, elementLink, elementsContainer, elementsTemplate, titleInput,
@@ -11,7 +11,7 @@ import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 
 
-// Добавить данные в форму редактирования fillInEditProfileFormInputs
+// Добавить данные в форму редактирования
 function setProfileFormValues({ name, job }) {
   nameInput.value = name;
   jobInput.value = job;
