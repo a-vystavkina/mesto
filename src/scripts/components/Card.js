@@ -1,13 +1,10 @@
-import {viewPopupImage, viewPopupTitle, viewPopup, viewPopupClose} from './utils.js';
 
-export class Card {
-  constructor(name, link, cardSelector, openPopup, closePopup) {
-    this._container = document.querySelector(cardSelector);
-    this._name = name;
-    this._link = link;
+export default class Card {
+  constructor({ data, handleCardClick }, cardSelector) {
+    this._name = data.name;
+    this._link = data.link;
     this._cardSelector = cardSelector;
-    this._openPopup = openPopup;
-    this._closePopup = closePopup;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -30,25 +27,11 @@ export class Card {
     this._element = null;
   }
 
-  _handleOpenPopup() {
-    viewPopupImage.src = this._link;
-    viewPopupImage.alt = this._name;
-    viewPopupTitle.textContent = this._name;
-    this._openPopup(viewPopup);
-  }
-
-  _handleClosePopup() {
-    viewPopupImage.src = '';
-    viewPopupImage.alt = '';
-    viewPopupTitle.textContent = '';
-    this._closePopup(viewPopup);
-  }
-
   _setEventListeners() {
     // открытие попапа просмотра изображения
-    this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._handleOpenPopup();
-    });
+    this._image.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link);
+    })
     // кнопка удаления карточки
     this._element.querySelector('.element__delete').addEventListener('click', () => {
       this._handleDeleteCard();

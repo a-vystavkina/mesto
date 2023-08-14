@@ -1,4 +1,4 @@
-export class FormValidator {
+export default class FormValidator {
   constructor(selectorsObj, formElement) {
     this._config = selectorsObj;
     this._formElement = formElement;
@@ -7,12 +7,12 @@ export class FormValidator {
   }
 
   _setEventListeners() {
-    this.toggleButtonState(this._inputList, this._buttonElement);
+    this.toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
-        this._checkInputValidity(this._formElement, inputElement);
-        this.toggleButtonState(this._inputList, this._buttonElement);
+        this._checkInputValidity(inputElement);
+        this.toggleButtonState();
       });
     });
 
@@ -56,9 +56,9 @@ export class FormValidator {
   // функция, которая возвращает или убирает текст ошибки в зависимости от валидности поля ввода
   _checkInputValidity(formElement, inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(this._formElement, inputElement, inputElement.validationMessage);
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      this._hideInputError(this._formElement, inputElement);
+      this._hideInputError(inputElement);
     }
   };
 
