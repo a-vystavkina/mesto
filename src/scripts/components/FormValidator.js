@@ -7,14 +7,13 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
+    this.toggleButtonState();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         this.toggleButtonState();
       });
     });
-
-    this.toggleButtonState();
   };
 
   // функция, которая возвращает или убирает текст ошибки в зависимости от валидности поля ввода

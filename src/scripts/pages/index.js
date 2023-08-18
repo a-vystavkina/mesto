@@ -13,7 +13,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 const formValidators = {};
 
 function validateForms (validationConfig) {
-  const formElements = Array.from(document.querySelectorAll(formClasses.popupForm));
+  const formElements = Array.from(document.querySelectorAll(validationConfig.popupForm));
   formElements.forEach(formElement => {
     const form = new FormValidator(validationConfig, formElement);
     formValidators[formElement.getAttribute('name')] = form;
@@ -21,14 +21,16 @@ function validateForms (validationConfig) {
   });
 }
 
+validateForms(validationConfig);
+
 //Попап просмотра изображения
 const viewImagePopup = new PopupWithImage('.popup_type_img-card');
 viewImagePopup.setEventListeners();
 
 //информация о пользователе
 const userInfo = new UserInfo({
-  nameSelector: nameInput,
-  jobSelector: jobInput
+  nameElement: profileTitle,
+  jobElement: profileSubtitle
 });
 
 // Добавить данные в форму редактирования

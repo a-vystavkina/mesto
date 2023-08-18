@@ -1,4 +1,3 @@
-
 export default class Card {
   constructor({ data, handleCardClick }, cardSelector) {
     this._name = data.name;
@@ -20,18 +19,18 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._image = this._element.querySelector('.element__image');
-    this._setEventListeners();
 
     this._image.src = this._link;
     this._image.alt = this._name;
     this._element.querySelector('.element__title').textContent = this._name;
+    this._likeBtn = this._element.querySelector('.element__like');
 
+    this._setEventListeners();
     return this._element;
   }
 
   _handleLikeCard() {
-    const likeBtn = this._element.querySelector('.element__like');
-    likeBtn.classList.toggle('element__like_active');
+    this._likeBtn.classList.toggle('element__like_active');
   }
 
   _handleDeleteCard() {
@@ -51,7 +50,7 @@ export default class Card {
     });
 
     // кнопка лайк
-    this._element.querySelector('.element__like').addEventListener('click', () => {
+    this._likeBtn.addEventListener('click', () => {
       this._handleLikeCard();
     });
   }
