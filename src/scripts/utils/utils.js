@@ -1,7 +1,6 @@
 const profileEditButton = document.querySelector('.profile__edit-button'); //Кнопка редактирования
 const popupEdit = document.querySelector('.popup_type_edit-card'); //Окно редактирования
 const formEditProfile = popupEdit.querySelector('.popup__form');
-const formEditElement = document.querySelector('form[name="edit-form"]'); // Форма редактирования
 const nameInput = popupEdit.querySelector('input[name="name"]');
 const jobInput = popupEdit.querySelector('input[name="job"]');
 const profileTitle = document.querySelector('.profile__title');
@@ -49,6 +48,6 @@ const validationConfig = {
   formSubmit : '.form__button'
 };
 
-export {profileEditButton, popupEdit, formEditProfile, formEditElement, nameInput,
+export {profileEditButton, popupEdit, formEditProfile, nameInput,
   jobInput, profileTitle, profileSubtitle, profileAddButton, popupAdd, formAddNewCard, elementsContainer, elementsTemplate, initialCards,
   validationConfig};

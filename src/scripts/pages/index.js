@@ -1,5 +1,5 @@
 import "./index.css";
-import {profileEditButton, popupEdit, formEditProfile, formEditElement, nameInput,
+import {profileEditButton, popupEdit, formEditProfile, nameInput,
   jobInput, profileTitle, profileSubtitle, profileAddButton, popupAdd, formAddNewCard, elementsContainer, elementsTemplate, initialCards,
   validationConfig} from '../utils/utils.js';
 
@@ -30,8 +30,8 @@ const userInfo = new UserInfo({
 
 // Добавить данные в форму редактирования
 function setProfileFormValues({name, job }) {
-  name = profileTitle.value;
-  job = profileSubtitle.value;
+  nameInput.value = name;
+  jobInput.value = job;
 }
 
 const createCard = (data) => {
