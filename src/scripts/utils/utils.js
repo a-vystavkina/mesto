@@ -1,5 +1,6 @@
 const profileEditButton = document.querySelector('.profile__edit-button'); //Кнопка редактирования
 const popupEdit = document.querySelector('.popup_type_edit-card'); //Окно редактирования
+const formEditProfile = popupEdit.querySelector('.popup__form');
 const formEditElement = document.querySelector('form[name="edit-form"]'); // Форма редактирования
 const nameInput = popupEdit.querySelector('input[name="name"]');
 const jobInput = popupEdit.querySelector('input[name="job"]');
@@ -7,8 +8,10 @@ const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const profileAddButton = document.querySelector('.profile__add-button'); //Кнопка добавления карточки
 const popupAdd = document.querySelector('.popup_type_add-card'); // Окно добавления карточки
+const formAddNewCard = popupAdd.querySelector('.popup__form');
 const elementsContainer = document.querySelector('.elements'); // карточки
 const elementsTemplate = document.querySelector('.element-template').content; // шаблон для добавления карточки
+
 
 //Шесть карточек «из коробки»
 const initialCards = [
@@ -46,6 +49,6 @@ const validationConfig = {
   formSubmit : '.form__button'
 };
 
-export {profileEditButton, popupEdit, formEditElement, nameInput,
-  jobInput, profileTitle, profileSubtitle, profileAddButton, popupAdd, elementsContainer, elementsTemplate, initialCards,
+export {profileEditButton, popupEdit, formEditProfile, formEditElement, nameInput,
+  jobInput, profileTitle, profileSubtitle, profileAddButton, popupAdd, formAddNewCard, elementsContainer, elementsTemplate, initialCards,
   validationConfig};

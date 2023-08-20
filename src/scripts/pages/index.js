@@ -1,6 +1,6 @@
 import "./index.css";
-import {profileEditButton, popupEdit, formEditElement, nameInput,
-  jobInput, profileTitle, profileSubtitle, profileAddButton, popupAdd, elementsContainer, elementsTemplate, initialCards,
+import {profileEditButton, popupEdit, formEditProfile, formEditElement, nameInput,
+  jobInput, profileTitle, profileSubtitle, profileAddButton, popupAdd, formAddNewCard, elementsContainer, elementsTemplate, initialCards,
   validationConfig} from '../utils/utils.js';
 
 import Section from "../components/Section.js";
@@ -10,18 +10,13 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 
-const formValidators = {};
+// валидация формы редактирования
+const formEditProfileValidator = new FormValidator(validationConfig, formEditProfile);
+formEditProfileValidator.enableValidation();
+// валидация формы добавления новой карточки
+const formAddNewCardValidator = new FormValidator(validationConfig, formAddNewCard);
+formAddNewCardValidator.enableValidation();
 
-function validateForms (validationConfig) {
-  const formElements = Array.from(document.querySelectorAll(validationConfig.popupForm));
-  formElements.forEach(formElement => {
-    const form = new FormValidator(validationConfig, formElement);
-    formValidators[formElement.getAttribute('name')] = form;
-    form.enableValidation();
-  });
-}
-
-validateForms(validationConfig);
 
 //Попап просмотра изображения
 const viewImagePopup = new PopupWithImage('.popup_type_img-card');
@@ -35,8 +30,8 @@ const userInfo = new UserInfo({
 
 // Добавить данные в форму редактирования
 function setProfileFormValues({name, job }) {
-  name = nameInput.value;
-  job = jobInput.value;
+  name = profileTitle.value;
+  job = profileSubtitle.value;
 }
 
 const createCard = (data) => {
@@ -78,6 +73,7 @@ profileEditButton.addEventListener('click', () => {
     job: info.job
   });
   editProfilePopup.open();
+  formEditProfileValidator.toggleButtonState();
 });
 
 
@@ -94,4 +90,9 @@ addCardPopup.setEventListeners();
 
 profileAddButton.addEventListener('click', function () {
   addCardPopup.open();
+  formAddNewCardValidator.toggleButtonState();
 });
+
+
+
+
