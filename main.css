@@ -488,6 +488,24 @@ template {
   }
 }
 
+.profile__avatar-button {
+  background-image: url(a086f758840ae814ecde.svg);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0;
+  border: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: .8s ease;
+}
+
+.profile__avatar-button:hover {
+  opacity: .8;
+  background-color: #000;
+}
+
 .profile__info {
   display: flex;
   flex-wrap: wrap;
@@ -670,7 +688,7 @@ template {
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
-  margin: 0;
+  margin: 3px 0 0 0;
   color: #000000;
   max-width: 198px;
   text-overflow: ellipsis;
@@ -699,15 +717,25 @@ template {
   opacity: 0.6;
 }
 
+.element__delete_hidden {
+  display: none;
+}
+
+.element__likes {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
 .element__like {
   padding: 0;
   background: url(1ad06e85f169668a1f36.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-color: transparent;
-  max-width: 22px;
-  width: 100%;
-  min-height: 19px;
+  width: 22px;
+  height: 19px;
   margin-bottom: 3px;
   border: none;
   cursor: pointer;
@@ -716,6 +744,16 @@ template {
 
 .element__like:hover {
   opacity: 0.5;
+}
+
+.element__like-number {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  display: block;
+  text-align: center;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #000;
 }
 
 .element__like_active {
