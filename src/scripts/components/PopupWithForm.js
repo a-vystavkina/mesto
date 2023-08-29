@@ -31,7 +31,7 @@ export default class PopupWithForm extends Popup {
   }
 
   // Изменяем состояние кнопки во время загрузки
-  loading(isLoading) {
+  setIsLoading(isLoading) {
     if (isLoading) {
       this._submitBtn.textContent = 'Сохранение...'
     } else {

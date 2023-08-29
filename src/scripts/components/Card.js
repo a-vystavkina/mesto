@@ -31,6 +31,14 @@ export default class Card {
     this._element = null;
   }
 
+  _handleLikeCard() {
+    if (this._likeBtn.classList.contains('element__like_active')) {
+      this._handleRemoveLike(this._cardId);
+    } else {
+      this._handleSetLike(this._cardId);
+    }
+  }
+
   _setEventListeners() {
     // открытие попапа просмотра изображения
     this._image.addEventListener('click', () => {
@@ -38,15 +46,11 @@ export default class Card {
     });
 
     this._deleteBtn.addEventListener('click', () => {
-      this._handleDeleteIconClick(this._card, this._cardId);
+      this._handleDeleteIconClick(this._cardId);
     });
 
     this._likeBtn.addEventListener('click', () => {
-      if (this._likeBtn.classList.contains('element__like_active')) {
-        this._handleRemoveLike(this._cardId);
-      } else {
-        this._handleSetLike(this._cardId);
-      }
+      this._handleLikeCard();
     });
   }
 
@@ -60,30 +64,35 @@ export default class Card {
     this._image.src = this._link;
     this._image.alt = this._name;
     this._element.querySelector('.element__title').textContent = this._name;
-    this._hasDeleteBtn();
-    this._isCardLiked();
+    this._checkDeleteButtonVisibility();
+    this._checkIsLiked();
     this._likesNumber.textContent = this._likes.length;
     this._setEventListeners();
 
     return this._element;
   }
 
-  // Стоит ли лайк на карточке
-  _isCardLiked() {
-    if (this._likes.some((user) => {
+  isLiked() {
+    this._likes.some((user) => {
       return this._userId === user._id;
-    })) {
+    });
+  }
+
+  // Стоит ли лайк на карточке
+  _checkIsLiked() {
+    if (this.isLiked()) {
       this._likeBtn.classList.add('element__like_active');
     }
   }
 
-  handleLikeCard(data) {
+
+  updateLikes(data) {
     this._likes = data.likes;
     this._likesNumber.textContent = this._likes.length;
     this._likeBtn.classList.toggle('element__like_active');
   }
 
-  _hasDeleteBtn() {
+  _checkDeleteButtonVisibility() {
     if (this._userId !== this._cardOwnerId) {
       this._deleteBtn.remove();
     }

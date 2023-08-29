@@ -8,8 +8,6 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 const profileAddButton = document.querySelector('.profile__add-button'); //Кнопка добавления карточки
 const popupAdd = document.querySelector('.popup_type_add-card'); // Окно добавления карточки
 const formAddNewCard = popupAdd.querySelector('.popup__form');
-const elementsContainer = document.querySelector('.elements'); // карточки
-const elementsTemplate = document.querySelector('.element-template').content; // шаблон для добавления карточки
 const popupEditAvatar = document.querySelector('.popup_type_edit-avatar'); // попап редактирования аватара пользователя
 const formEditAvatar = popupEditAvatar.querySelector('.popup__form'); // Форма редактирования аватара пользователя
 const buttonEditAvatar = document.querySelector('.profile__avatar-button'); // кнопка редактирования аватара пользователя
@@ -51,6 +49,6 @@ const validationConfig = {
   formSubmit : '.form__button'
 };
 
-export {profileEditButton, popupEdit, formEditProfile, nameInput,
-  jobInput, profileTitle, profileSubtitle, profileAddButton, popupAdd, formAddNewCard, elementsContainer, elementsTemplate, initialCards,
+export {profileEditButton, formEditProfile, nameInput,
+  jobInput, profileTitle, profileSubtitle, profileAddButton, formAddNewCard, initialCards,
   validationConfig, popupEditAvatar, formEditAvatar, buttonEditAvatar, avatar};
