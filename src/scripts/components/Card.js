@@ -73,7 +73,7 @@ export default class Card {
   }
 
   isLiked() {
-    this._likes.some((user) => {
+    return this._likes.some((user) => {
       return this._userId === user._id;
     });
   }

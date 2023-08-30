@@ -55,12 +55,7 @@ formEditAvatarValidator.enableValidation();
 const viewImagePopup = new PopupWithImage('.popup_type_img-card');
 viewImagePopup.setEventListeners();
 
-// Добавить данные в форму редактирования
-function setProfileFormValues({name, job }) {
-  nameInput.value = name;
-  jobInput.value = job;
-}
-
+//создание карточки
 const createCard = (data) => {
   const card = new Card({
     data: data,
